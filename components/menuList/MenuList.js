@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import ListItemFake from "./ListItemFake";
+import ListItem from "./ListItem";
 
 const MenuList = () => {
   const [data, setData] = useState([]);
@@ -16,7 +17,9 @@ const MenuList = () => {
     getMenuItems();
   }, []);
 
-  console.log("data is", data);
+  const productsArr = Object.values(data);
+  const productsListArr = Object.keys(data);
+
   return (
     <MenuStyled>
       <div className="menuLeft">
@@ -34,6 +37,19 @@ const MenuList = () => {
               <p>New & Promo products</p>
             </Link>
           </div>
+          {productsListArr.map((item, idx) => {
+            const spaced = item.replace("_", " ");
+            const listItemTitle =
+              spaced.charAt(0).toUpperCase() + spaced.slice(1);
+            return (
+              <ListItem
+                key={idx}
+                itemDetails={productsArr[idx]}
+                itemTitle={listItemTitle}
+                rawTitle={item}
+              />
+            );
+          })}
 
           <ListItemFake />
           <div className="bottomBar">
@@ -70,7 +86,7 @@ const query = gql`
       title
       slug
     }
-    petCares {
+    pet_Cares {
       id
       title
       slug

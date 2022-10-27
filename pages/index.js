@@ -73,7 +73,7 @@ const MyQuery = gql`
       slug
       title
     }
-    petCares(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
+    pet_Cares(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
       id
       discount
       description
