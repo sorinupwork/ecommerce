@@ -3,10 +3,6 @@ import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
-const Navigation = styled.div`
-  background-color: #004695;
-`;
-
 const MainNavigation = () => {
   return (
     <Navigation>
@@ -39,3 +35,32 @@ const MainNavigation = () => {
 };
 
 export default MainNavigation;
+
+const Navigation = styled.div`
+  background-color: #004695;
+
+  .topHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+    height: 7rem;
+    align-items: center;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    ul {
+      display: flex;
+      li {
+        list-style: none;
+        color: #e9edf2;
+        padding: 0 2rem;
+      }
+    }
+  }
+
+  .cartWrapper {
+    padding-left: 3rem;
+  }
+`;
