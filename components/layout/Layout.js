@@ -1,6 +1,6 @@
-import React from "react";
 import Footer from "./Footer";
 import MainNavigation from "./MainNavigation";
+
 import styled from "styled-components";
 
 const Layout = (props) => {

@@ -9,7 +9,7 @@ const MainNavigation = () => {
       <div className="topHeader">
         <div className="imageWrapper">
           <Link href="/">
-            <Image src="/logo.png" height={150} width={200} alt="logo" />
+            <Image src="/logo.svg" height={150} width={200} alt="logo" />
           </Link>
         </div>
 

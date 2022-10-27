@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const Footer = () => {
@@ -6,7 +5,7 @@ const Footer = () => {
 
   return (
     <FooterStyled>
-      <p>💻 madam Computer Store &copy; {date}</p>
+      <p> 🐈 🐶 Pet Shop &copy; {date}</p>
     </FooterStyled>
   );
 };
