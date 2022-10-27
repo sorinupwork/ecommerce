@@ -14,77 +14,77 @@ export default Home;
 
 export const MyQuery = gql`
   {
-    cpus(where: { OR: [{ newProduct: true }, { promotion: true }] }) {
-      id
-      discountPercent
-      images {
-        url
-      }
-      newProduct
-      onDiscount
-      price
-      promotion
-      slug
-      title
-      subtitle
-    }
-    gpus(where: { OR: [{ newProduct: true }, { promotion: true }] }) {
-      id
-      discountPercent
-      images {
-        url
-      }
-      newProduct
-      onDiscount
-      price
-      promotion
-      slug
-      title
-      subtitle
-    }
-    laptops(where: { OR: [{ newProduct: true }, { promotion: true }] }) {
-      id
-      discountPercent
-      images {
-        url
-      }
-      newProduct
-      onDiscount
-      price
-      promotion
-      slug
-      title
-      subtitle
-    }
-    motherboards(where: { OR: [{ newProduct: true }, { promotion: true }] }) {
-      id
-      discountPercent
-      images {
-        url
-      }
-      newProduct
-      onDiscount
-      price
-      promotion
-      slug
-      title
-      subtitle
-    }
-    storageEquipments(
-      where: { OR: [{ newProduct: true }, { promotion: true }] }
+    accessories(
+      where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }
     ) {
       id
-      discountPercent
+      discount
+      description
+      price
+      onPromotion
+      onDiscount
+      isNewProduct
       images {
         url
       }
-      newProduct
-      onDiscount
-      price
-      promotion
       slug
       title
-      subtitle
+    }
+    houses(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
+      id
+      discount
+      description
+      price
+      onPromotion
+      onDiscount
+      isNewProduct
+      images {
+        url
+      }
+      slug
+      title
+    }
+    outfits(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
+      id
+      discount
+      description
+      price
+      onPromotion
+      onDiscount
+      isNewProduct
+      images {
+        url
+      }
+      slug
+      title
+    }
+    petCares(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
+      id
+      discount
+      description
+      price
+      onPromotion
+      onDiscount
+      isNewProduct
+      images {
+        url
+      }
+      slug
+      title
+    }
+    toys(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
+      id
+      discount
+      description
+      price
+      onPromotion
+      onDiscount
+      isNewProduct
+      images {
+        url
+      }
+      slug
+      title
     }
   }
 `;
