@@ -133,8 +133,8 @@ const MenuStyled = styled.div`
 
       :hover {
         cursor: pointer;
-        background-color: #d1dfed;
-        border-color: c3ced9;
+        background-color: #c3ced9;
+        border-color: #d1dfed;
       }
     }
 

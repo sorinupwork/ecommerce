@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import styled from "styled-components";
 
 const MainNavigation = () => {
@@ -9,7 +8,13 @@ const MainNavigation = () => {
       <div className="topHeader">
         <div className="imageWrapper">
           <Link href="/">
-            <Image src="/logo.svg" height={150} width={200} alt="logo" />
+            <Image
+              src="/logo.svg"
+              priority
+              height={150}
+              width={200}
+              alt="logo"
+            />
           </Link>
         </div>
 
