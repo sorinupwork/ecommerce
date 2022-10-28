@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-const TopBar = () => {
+const TopBar = (props) => {
   return (
     <TopBarStyled>
       <div className="sectionTitle">
         <div className="menuTitle">
-          <h3>Top Bar Title</h3>
+          <h3>{props.title ? props.title : "Products"}</h3>
         </div>
       </div>
     </TopBarStyled>

@@ -1,10 +1,24 @@
 import { gql, GraphQLClient } from "graphql-request";
+import Link from "next/link";
 import styled from "styled-components";
 
 import MenuList from "../components/menuList/MenuList";
+import ProductCard from "../components/ProductCard";
 import TopBar from "../components/productSection/TopBar";
 
 const Home = ({ data }) => {
+  // console.log("data is", data);
+
+  const topBarTitle = "New & Promo products";
+
+  const productsArr = Object.values(data);
+
+  // console.log("productsArr is", productsArr);
+
+  let myItems = [];
+  productsArr.map((items) => items.map((item) => myItems.push(item)));
+
+  // console.log("myItems is", myItems);
   return (
     <HomeStyled>
       <div className="menu">
@@ -12,8 +26,14 @@ const Home = ({ data }) => {
       </div>
 
       <div className="mainProductSection">
-        <TopBar />
-        <div className="productCardsLayout">Home</div>
+        <TopBar title={topBarTitle} />
+        <div className="productCardsLayout">
+          {myItems.map((item) => (
+            <Link key={item.id} href={`/promotions/${item.slug}`}>
+              <ProductCard />
+            </Link>
+          ))}
+        </div>
       </div>
     </HomeStyled>
   );
@@ -118,5 +138,12 @@ const HomeStyled = styled.div`
 
   .mainProductSection {
     width: 100%;
+
+    .productCardsLayout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-around;
+    }
   }
 `;
