@@ -25,7 +25,7 @@ const Title = ({ data }) => {
           <div className="productsCardsLayout">
             {productsArr.map((item) => (
               <Link key={item.id} href={`/products/${item.slug}`}>
-                <ProductCard />
+                <ProductCard item={item} />
               </Link>
             ))}
           </div>

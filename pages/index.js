@@ -29,8 +29,8 @@ const Home = ({ data }) => {
         <TopBar title={topBarTitle} />
         <div className="productCardsLayout">
           {myItems.map((item) => (
-            <Link key={item.id} href={`/promotions/${item.slug}`}>
-              <ProductCard />
+            <Link key={item.id} href={`/products/${item.slug}`}>
+              <ProductCard item={item} />
             </Link>
           ))}
         </div>
@@ -64,6 +64,7 @@ const MyQuery = gql`
       }
       slug
       title
+      stock
     }
     houses(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
       id
@@ -78,6 +79,7 @@ const MyQuery = gql`
       }
       slug
       title
+      stock
     }
     outfits(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
       id
@@ -92,6 +94,7 @@ const MyQuery = gql`
       }
       slug
       title
+      stock
     }
     pet_Cares(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
       id
@@ -106,6 +109,7 @@ const MyQuery = gql`
       }
       slug
       title
+      stock
     }
     toys(where: { OR: [{ isNewProduct: true }, { onPromotion: true }] }) {
       id
@@ -120,6 +124,7 @@ const MyQuery = gql`
       }
       slug
       title
+      stock
     }
   }
 `;
