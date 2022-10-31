@@ -68,6 +68,33 @@ const SlugPage = ({ product }) => {
                   />
                 </div>
 
+                <div className="priceSection">
+                  <div className="prices">
+                    {isPromoProduct ? (
+                      <div>
+                        <p className="fadedPrice">
+                          Price: ${price} <span>- {discount}% OFF</span>
+                        </p>
+                        <p className="promoPrice">
+                          Promo price = <span>${discountPrice}</span>
+                        </p>
+                      </div>
+                    ) : isNewProduct ? (
+                      <div>
+                        <p className="newProduct">
+                          <span>NEW</span> Product
+                        </p>
+                        <p className="price">Current price ${price}</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p className="regularProduct">Regular Product</p>
+                        <p className="price">Current price ${price}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <Image src={mainImgSrc} width={478} height={478} alt={title} />
               </div>
             </div>
