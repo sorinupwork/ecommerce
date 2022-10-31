@@ -18,7 +18,7 @@ const ProductCard = ({ item }) => {
     stock,
   } = useGetItemDetails(item);
 
-  console.log("discount price is", item);
+  // console.log("discount price is", item);
   return (
     <CardStyle>
       <div className={`cardFrame ${stock < 1 && "outOfStock"}`}>

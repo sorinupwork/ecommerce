@@ -55,6 +55,9 @@ const MyQuery = gql`
       id
       discount
       description
+      description2 {
+        raw
+      }
       price
       onPromotion
       onDiscount
@@ -70,6 +73,9 @@ const MyQuery = gql`
       id
       discount
       description
+      description2 {
+        raw
+      }
       price
       onPromotion
       onDiscount
@@ -85,6 +91,9 @@ const MyQuery = gql`
       id
       discount
       description
+      description2 {
+        raw
+      }
       price
       onPromotion
       onDiscount
@@ -100,6 +109,9 @@ const MyQuery = gql`
       id
       discount
       description
+      description2 {
+        raw
+      }
       price
       onPromotion
       onDiscount
@@ -115,6 +127,9 @@ const MyQuery = gql`
       id
       discount
       description
+      description2 {
+        raw
+      }
       price
       onPromotion
       onDiscount

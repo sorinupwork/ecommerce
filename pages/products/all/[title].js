@@ -61,6 +61,9 @@ export async function getServerSideProps(context) {
         images {
           url
         }
+        description2 {
+          raw
+        }
       }
     }
   `;
