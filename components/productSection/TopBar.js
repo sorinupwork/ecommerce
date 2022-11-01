@@ -23,7 +23,7 @@ const TopBarStyled = styled.div`
     .menuTitle {
       h3 {
         color: #e9edf2;
-        font-weight: 400;
+        font-weight: 300;
         letter-spacing: 0.05rem;
         padding: 0.3rem 0;
       }

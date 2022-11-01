@@ -5,6 +5,7 @@ import MenuList from "../../components/menuList/MenuList";
 import TopBar from "../../components/productSection/TopBar";
 import useGetItemDetails from "../../utils/useGetItemDetails";
 import Image from "next/image";
+import Link from "next/link";
 
 const SlugPage = ({ product }) => {
   const productArray = Object.values(product);
@@ -15,7 +16,6 @@ const SlugPage = ({ product }) => {
     isNewProduct,
     isPromoProduct,
     price,
-    tempPrice,
     discount,
     discountPrice,
     imgsrc,
@@ -67,35 +67,51 @@ const SlugPage = ({ product }) => {
                     height={90}
                   />
                 </div>
-
-                <div className="priceSection">
-                  <div className="prices">
-                    {isPromoProduct ? (
-                      <div>
-                        <p className="fadedPrice">
-                          Price: ${price} <span>- {discount}% OFF</span>
-                        </p>
-                        <p className="promoPrice">
-                          Promo price = <span>${discountPrice}</span>
-                        </p>
-                      </div>
-                    ) : isNewProduct ? (
-                      <div>
-                        <p className="newProduct">
-                          <span>NEW</span> Product
-                        </p>
-                        <p className="price">Current price ${price}</p>
-                      </div>
-                    ) : (
-                      <div>
-                        <p className="regularProduct">Regular Product</p>
-                        <p className="price">Current price ${price}</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
                 <Image src={mainImgSrc} width={478} height={478} alt={title} />
+              </div>
+
+              <div className="priceSection">
+                <div className="prices">
+                  {isPromoProduct ? (
+                    <div>
+                      <p className="fadedPrice">
+                        Price: ${price} <span>- {discount}% OFF</span>
+                      </p>
+                      <p className="promoPrice">
+                        Promo price = <span>${discountPrice}</span>
+                      </p>
+                    </div>
+                  ) : isNewProduct ? (
+                    <div>
+                      <p className="newProduct">
+                        <span>NEW</span> Product
+                      </p>
+                      <p className="price">Current price ${price}</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="regularProduct">Regular Product</p>
+                      <p className="price">Current price ${price}</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className={`btn ${stock < 1 && "outOfStock"}`}>
+                <Link href={"#"}>
+                  <button>
+                    {stock > 0 ? "Add to Cart" : " Out of Stock"}
+                    <div className="cartIconWrap">
+                      <Image
+                        priority
+                        src={"/cartIcon-white.svg"}
+                        height={18}
+                        width={18}
+                        alt="cartIcon"
+                      />
+                    </div>
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -230,5 +246,119 @@ const ProductStyled = styled.div`
 
   .productSection {
     width: 100%;
+
+    .productInfo {
+      display: flex;
+      gap: 2rem;
+      padding: 2% 3%;
+
+      .text-bold {
+        font-weight: bold;
+      }
+
+      .text-italic {
+        font-style: italic;
+      }
+
+      .productDetails {
+        padding: 0 1rem;
+
+        .subtitle {
+          text-align: center;
+          padding-bottom: 0.2rem;
+
+          h3 {
+            background-color: #e9edf2;
+            border: solid 1px #c3ced9;
+            padding: 0.3rem 0.4rem;
+            border-radius: 4px;
+          }
+        }
+
+        .productDescriptionTitle {
+          text-align: left;
+
+          p {
+            font-size: 1.05rem;
+            font-weight: bold;
+          }
+        }
+
+        .allDescription {
+          margin: 5%;
+        }
+      }
+
+      .productPreview {
+        padding: 0 1rem;
+
+        .previewWrapper {
+          text-align: center;
+
+          .promoBanner {
+            position: absolute;
+            transform: translate(+20%, +40%);
+            z-index: 100;
+            width: 8vw;
+          }
+        }
+      }
+
+      .prices {
+        font-size: 1.1rem;
+
+        p {
+          margin: 0.7rem;
+        }
+
+        .fadedPrice {
+          color: #7c90a6;
+
+          span {
+            color: #cc194c;
+            font-size: 1.2rem;
+            font-weight: 600;
+          }
+        }
+
+        .newProduct {
+          span {
+            color: #cc194c;
+            font-size: 1.2rem;
+            font-weight: 600;
+          }
+        }
+
+        .promoPrice {
+          span {
+            color: #cc194c;
+            font-size: 1.2rem;
+            font-weight: 600;
+          }
+        }
+
+        .price {
+          span {
+            font-size: 1.2rem;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .btn {
+        padding-top: 0.7rem;
+
+        button {
+          display: flex;
+          align-items: center;
+          margin: auto;
+          padding: 0.5rem 2.2rem;
+
+          .cartIconWrap {
+            padding-left: 0.5rem;
+          }
+        }
+      }
+    }
   }
 `;
