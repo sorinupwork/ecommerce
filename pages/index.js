@@ -7,18 +7,13 @@ import ProductCard from "../components/ProductCard";
 import TopBar from "../components/productSection/TopBar";
 
 const Home = ({ data }) => {
-  // console.log("data is", data);
-
   const topBarTitle = "New & Promo products";
 
   const productsArr = Object.values(data);
 
-  // console.log("productsArr is", productsArr);
-
   let myItems = [];
   productsArr.map((items) => items.map((item) => myItems.push(item)));
 
-  // console.log("myItems is", myItems);
   return (
     <HomeStyled>
       <div className="menu">

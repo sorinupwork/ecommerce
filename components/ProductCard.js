@@ -8,17 +8,14 @@ const ProductCard = ({ item }) => {
     isNewProduct,
     isPromoProduct,
     price,
-    tempPrice,
     discount,
     discountPrice,
     imgsrc,
     mainImgSrc,
-    id,
     title,
     stock,
   } = useGetItemDetails(item);
 
-  // console.log("discount price is", item);
   return (
     <CardStyle>
       <div className={`cardFrame ${stock < 1 && "outOfStock"}`}>
@@ -37,7 +34,7 @@ const ProductCard = ({ item }) => {
         <div className="imgWrapper">
           <Image
             priority
-            src={item.images[0].url}
+            src={mainImgSrc}
             height={200}
             width={200}
             alt="product-image"
@@ -45,7 +42,7 @@ const ProductCard = ({ item }) => {
           />
         </div>
 
-        <h3>{item.title}</h3>
+        <h3>{title}</h3>
 
         {isPromoProduct ? (
           <div>
