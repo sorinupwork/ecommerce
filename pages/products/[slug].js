@@ -25,6 +25,7 @@ const SlugPage = ({ product }) => {
     imgsrc,
     mainImgSrc,
     title,
+    numItems,
     stock,
     description,
     description2,
@@ -115,7 +116,8 @@ const SlugPage = ({ product }) => {
                             stock,
                             price,
                             discount,
-                            mainImgSrc
+                            mainImgSrc,
+                            numItems
                           )
                         : ""
                     }

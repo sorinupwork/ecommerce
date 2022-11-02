@@ -23,6 +23,7 @@ const useGetItemDetails = (item) => {
   const title = item.title;
   const stock = item.stock;
   const description = item.description;
+  const numItems = 1;
 
   return {
     isNewProduct,
@@ -38,6 +39,7 @@ const useGetItemDetails = (item) => {
     stock,
     description,
     description2,
+    numItems,
   };
 };
 

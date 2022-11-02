@@ -2,6 +2,7 @@ import React from "react";
 import TopBar from "../../components/productSection/TopBar";
 import styled from "styled-components";
 import { useProductContext } from "../../state/context/productContext";
+import CartComponent from "../../components/cart/CartComponent";
 
 const AddToCart = () => {
   const data = useProductContext();
@@ -11,18 +12,32 @@ const AddToCart = () => {
     <StyledCartPage>
       <div className="mainCartSection">
         <TopBar title={"Cart Page"} />
-        <h3>This is the Cart Page</h3>
-        {data.cart.length ? (
-          <div>
-            <h2>Your cart items</h2>
-            <h3 style={{ color: "#19a695" }}>{data.cart[0].title}</h3>
-            <h3 style={{ color: "#19a695" }}>Stock: {data.cart[0].stock}</h3>
+        <h2>Your Cart Items</h2>
+
+        <div className="cartInfoSection">
+          <div className="cartInfo">
+            <div className="infoSection">
+              <div className="columnTitle">
+                <h4>Item</h4>
+                <h4>Price</h4>
+                <h4>Quantity</h4>
+                <h4>Subtotal</h4>
+              </div>
+            </div>
           </div>
-        ) : (
-          <div>
-            <h2 style={{ color: "#e05539" }}>Your cart is Empty</h2>
-          </div>
-        )}
+
+          {data.cart.length ? (
+            data.cart.map((item) => (
+              <div key={item.id}>
+                <CartComponent />
+              </div>
+            ))
+          ) : (
+            <div>
+              <h2 style={{ color: "#e05539" }}>Your cart is Empty</h2>
+            </div>
+          )}
+        </div>
       </div>
     </StyledCartPage>
   );
