@@ -29,7 +29,7 @@ const MainNavigation = () => {
           </ul>
 
           <div className="cartWrapper">
-            <Link href="#">
+            <Link href="/cart">
               <Image src="/cartIcon.svg" height={24} width={24} alt="cart" />
             </Link>
           </div>
