@@ -1,14 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import { useProductContext } from "../state/context/productContext";
 import useGetItemDetails from "../utils/useGetItemDetails";
 
 const ProductCard = ({ item }) => {
+  const { addToCart } = useProductContext();
+
   const {
     isNewProduct,
     isPromoProduct,
     price,
     discount,
+    id,
     discountPrice,
     imgsrc,
     mainImgSrc,
@@ -76,8 +80,14 @@ const ProductCard = ({ item }) => {
       </div>
 
       <div className={`btn ${stock < 1 && "outOfStock"}`}>
-        <Link href={"/cart"} legacyBehavior passHref>
-          <button>
+        <Link href={`${stock > 0 ? "/cart" : "#"}`} legacyBehavior passHref>
+          <button
+            onClick={() =>
+              stock > 0
+                ? addToCart(id, title, stock, price, discount, mainImgSrc)
+                : ""
+            }
+          >
             {stock > 0 ? "Add to Cart" : "Out of Stock"}
 
             <div className="cartIconWrap">

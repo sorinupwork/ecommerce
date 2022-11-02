@@ -6,8 +6,11 @@ import TopBar from "../../components/productSection/TopBar";
 import useGetItemDetails from "../../utils/useGetItemDetails";
 import Image from "next/image";
 import Link from "next/link";
+import { useProductContext } from "../../state/context/productContext";
 
 const SlugPage = ({ product }) => {
+  const { addToCart } = useProductContext();
+
   const productArray = Object.values(product);
   let item = {};
   productArray.map((items) => items.map((i) => (item = i)));
@@ -17,6 +20,7 @@ const SlugPage = ({ product }) => {
     isPromoProduct,
     price,
     discount,
+    id,
     discountPrice,
     imgsrc,
     mainImgSrc,
@@ -97,8 +101,25 @@ const SlugPage = ({ product }) => {
               </div>
 
               <div className={`btn ${stock < 1 && "outOfStock"}`}>
-                <Link href={"/cart"}>
-                  <button>
+                <Link
+                  href={`${stock > 0 ? "/cart" : "#"}`}
+                  legacyBehavior
+                  passHref
+                >
+                  <button
+                    onClick={() =>
+                      stock > 0
+                        ? addToCart(
+                            id,
+                            title,
+                            stock,
+                            price,
+                            discount,
+                            mainImgSrc
+                          )
+                        : ""
+                    }
+                  >
                     {stock > 0 ? "Add to Cart" : " Out of Stock"}
                     <div className="cartIconWrap">
                       <Image
