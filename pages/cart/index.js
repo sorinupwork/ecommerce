@@ -29,7 +29,7 @@ const AddToCart = () => {
           {data.cart.length ? (
             data.cart.map((item) => (
               <div key={item.id}>
-                <CartComponent />
+                <CartComponent item={item} />
               </div>
             ))
           ) : (
@@ -37,6 +37,12 @@ const AddToCart = () => {
               <h2 style={{ color: "#e05539" }}>Your cart is Empty</h2>
             </div>
           )}
+          <div className="bordering">
+            <hr />
+          </div>
+          <div className="total">
+            <p>Total amount: $xxx</p>
+          </div>
         </div>
       </div>
     </StyledCartPage>
@@ -51,5 +57,35 @@ const StyledCartPage = styled.div`
   .mainCartSection {
     width: 100%;
     text-align: center;
+
+    h2 {
+      margin: 2rem;
+    }
+
+    .bordering {
+      hr {
+        border-top: 1px solid #004695;
+      }
+    }
+    .cartInfoSection {
+      margin: 0 20%;
+      .cartInfo {
+        .infoSection {
+          background-color: #004695;
+          border-radius: 6px 6px 0 0;
+          .columnTitle {
+            margin: 0 7%;
+            display: flex;
+            justify-content: space-between;
+            h4 {
+              color: #e9edf2;
+              margin: 0;
+              padding: 0.42rem 0;
+              font-weight: 400;
+            }
+          }
+        }
+      }
+    }
   }
 `;
