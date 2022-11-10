@@ -12,7 +12,7 @@ const AddToCart = () => {
     <StyledCartPage>
       <div className="mainCartSection">
         <TopBar title={"Cart Page"} />
-        <h2>Your Cart Items</h2>
+        <div>Your Cart Items</div>
 
         <div className="cartInfoSection">
           <div className="cartInfo">
@@ -26,7 +26,7 @@ const AddToCart = () => {
             </div>
           </div>
 
-          {data.cart.length ? (
+          {data.cart ? (
             data.cart.map((item) => (
               <div key={item.id}>
                 <CartComponent item={item} />
