@@ -5,6 +5,7 @@ import { useProductContext } from "../../state/context/productContext";
 import CartComponent from "../../components/cart/CartComponent";
 import Head from "next/head";
 import Link from "next/link";
+import CartTotal from "../../components/cart/CartTotal";
 
 const AddToCart = () => {
   const { cart, clearCart } = useProductContext();
@@ -14,6 +15,26 @@ const AddToCart = () => {
     setIsLoading(false);
   }, []);
 
+  let shipping = 7.5;
+  const allItemsSubtotals = [];
+  !loading &&
+    cart.length &&
+    cart.map((item) => {
+      const subtotal = item.discount
+        ? item.price * item.numItems -
+          item.price * item.numItems * (item.discount / 100)
+        : item.price * item.numItems;
+      allItemsSubtotals.push(subtotal);
+    });
+
+  const initialAmount = 0;
+  const allSubtotals = allItemsSubtotals.reduce(
+    (previousAmount, currentAmount) => previousAmount + currentAmount,
+    initialAmount
+  );
+
+  const total = Math.round((allSubtotals + Number.EPSILON) * 100) / 100;
+  total > 0 ? (shipping = 7.25) : (shipping = 0);
   return (
     <>
       <Head>
@@ -61,7 +82,7 @@ const AddToCart = () => {
                   </div>
                 </div>
                 <div className="total">
-                  {/* <CartTotal total={total} shipping={shipping} /> */}
+                  <CartTotal total={total} shipping={shipping} />
                 </div>
               </div>
             </div>

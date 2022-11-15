@@ -1,8 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useProductContext } from "../../state/context/productContext";
 
 const MainNavigation = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  const { cart } = useProductContext();
+
+  const allItemsFromCart = [];
+
+  if (!loading) {
+    cart.map((item) => {
+      allItemsFromCart.push(item.numItems);
+    });
+  }
+
+  const initialAmount = 0;
+  const itemsInCart = allItemsFromCart.reduce(
+    (previousAmount, currentAmount) => previousAmount + currentAmount,
+    initialAmount
+  );
+
   return (
     <Navigation>
       <div className="topHeader">
@@ -28,9 +52,31 @@ const MainNavigation = () => {
             </li>
           </ul>
 
-          <div className="cartWrapper">
+          <div className={`cartWrapper ${itemsInCart > 0 && "lessPadding"}`}>
             <Link href="/cart">
-              <Image src="/cartIcon.svg" height={24} width={24} alt="cart" />
+              <div className="fullCart">
+                {itemsInCart > 0 && (
+                  <div className="items">
+                    <div className="numbers">
+                      <p>{itemsInCart}</p>
+                    </div>
+                    <Image
+                      src="/cartItems.svg"
+                      height={24}
+                      width={24}
+                      alt="items in cart"
+                    />
+                  </div>
+                )}
+                <div className="cart">
+                  <Image
+                    src="/cartIcon.svg"
+                    height={24}
+                    width={24}
+                    alt="cart"
+                  />
+                </div>
+              </div>
             </Link>
           </div>
         </nav>
@@ -50,22 +96,46 @@ const Navigation = styled.div`
     padding: 0 10%;
     height: 7rem;
     align-items: center;
-  }
 
-  nav {
-    display: flex;
-    align-items: center;
-    ul {
+    nav {
       display: flex;
-      li {
-        list-style: none;
-        color: #e9edf2;
-        padding: 0 2rem;
+      align-items: center;
+      ul {
+        display: flex;
+        li {
+          list-style: none;
+          color: #e9edf2;
+          padding: 0 2rem;
+        }
       }
     }
-  }
 
-  .cartWrapper {
-    padding-left: 3rem;
+    .cartWrapper {
+      display: flex;
+      padding-left: 3rem;
+      .fullCart {
+        display: flex;
+        .items {
+          align-items: center;
+          position: relative;
+          display: flex;
+          z-index: 100;
+          transform: translate(10px, -13px);
+          .numbers {
+            position: absolute;
+            z-index: 200;
+            width: 24px;
+            text-align: center;
+            p {
+              color: #e9edf2;
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+    .lessPadding {
+      padding-left: 1.5rem;
+    }
   }
 `;
