@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^1.9.2",
     "@emailjs/browser": "^3.9.0",
     "@graphcms/rich-text-react-renderer": "^0.6.1",
     "graphql": "^16.6.0",

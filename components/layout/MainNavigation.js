@@ -3,9 +3,11 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useProductContext } from "../../state/context/productContext";
+import { useUser } from "@auth0/nextjs-auth0";
 
 const MainNavigation = () => {
   const [loading, setLoading] = useState(true);
+  const { user } = useUser();
 
   useEffect(() => {
     setLoading(false);
@@ -45,8 +47,14 @@ const MainNavigation = () => {
         <nav>
           <ul>
             <li>
-              <Link href="#">login</Link>
+              {user ? (
+                <Link href="/user/logout">{`👋 ${user.nickname}`}</Link>
+              ) : (
+                <Link href="/user/login">login</Link>
+              )}
             </li>
+          </ul>
+          <ul>
             <li>
               <Link href="/contact">contact</Link>
             </li>
