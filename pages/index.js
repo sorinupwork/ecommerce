@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
+import Head from "next/head";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -17,22 +18,29 @@ const Home = ({ data }) => {
   productsArr.map((items) => items.map((item) => myItems.push(item)));
 
   return (
-    <HomeStyled>
-      <div className="menu">
-        <MenuList />
-      </div>
+    <>
+      <Head>
+        <title>{topBarTitle}</title>
+        <meta name="description" content="Home Page details" />
+      </Head>
 
-      <div className="mainProductSection">
-        <TopBar title={topBarTitle} />
-        <div className="productCardsLayout">
-          {myItems.map((item) => (
-            <Link key={item.id} href={`/products/${item.slug}`}>
-              <ProductCard item={item} />
-            </Link>
-          ))}
+      <HomeStyled>
+        <div className="menu">
+          <MenuList />
         </div>
-      </div>
-    </HomeStyled>
+
+        <div className="mainProductSection">
+          <TopBar title={topBarTitle} />
+          <div className="productCardsLayout">
+            {myItems.map((item) => (
+              <Link key={item.id} href={`/products/${item.slug}`}>
+                <ProductCard item={item} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </HomeStyled>
+    </>
   );
 };
 

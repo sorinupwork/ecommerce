@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
+import Head from "next/head";
 import Link from "next/link";
 import styled from "styled-components";
 import MenuList from "../../../components/menuList/MenuList";
@@ -15,22 +16,28 @@ const Title = ({ data }) => {
     const productsArr = Object.values(data)[0];
 
     return (
-      <AllProductsStyle>
-        <div className="menu">
-          <MenuList />
-        </div>
-
-        <div className="mainProductSection">
-          <TopBar title={topBarTitle} />
-          <div className="productsCardsLayout">
-            {productsArr.map((item) => (
-              <Link key={item.id} href={`/products/${item.slug}`}>
-                <ProductCard item={item} />
-              </Link>
-            ))}
+      <>
+        <Head>
+          <title>{topBarTitle}</title>
+          <meta name="description" content="All Products details" />
+        </Head>
+        <AllProductsStyle>
+          <div className="menu">
+            <MenuList />
           </div>
-        </div>
-      </AllProductsStyle>
+
+          <div className="mainProductSection">
+            <TopBar title={topBarTitle} />
+            <div className="productsCardsLayout">
+              {productsArr.map((item) => (
+                <Link key={item.id} href={`/products/${item.slug}`}>
+                  <ProductCard item={item} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </AllProductsStyle>
+      </>
     );
   }
 };

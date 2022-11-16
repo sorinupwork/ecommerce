@@ -7,6 +7,7 @@ import useGetItemDetails from "../../utils/useGetItemDetails";
 import Image from "next/image";
 import Link from "next/link";
 import { useProductContext } from "../../state/context/productContext";
+import Head from "next/head";
 
 const ProductByID = ({ product }) => {
   const { addToCart } = useProductContext();
@@ -32,114 +33,125 @@ const ProductByID = ({ product }) => {
   } = useGetItemDetails(item);
 
   return (
-    <ProductStyled>
-      <div className="menuSection">
-        <MenuList />
-      </div>
-
-      <div className="productSection">
-        <div className="productTitle">
-          <TopBar title={title} />
+    <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content="Cart products details" />
+      </Head>
+      <ProductStyled>
+        <div className="menuSection">
+          <MenuList />
         </div>
-        <div className="productInfo">
-          <div className="productDetails">
-            <div className="product">
-              <div className="subtitle">
-                <h3>{description}</h3>
-              </div>
 
-              <div className="allDescription">
-                <div className="productDescriptionTitle">
-                  <p>Product Description: </p>
+        <div className="productSection">
+          <div className="productTitle">
+            <TopBar title={title} />
+          </div>
+          <div className="productInfo">
+            <div className="productDetails">
+              <div className="product">
+                <div className="subtitle">
+                  <h3>{description}</h3>
                 </div>
 
-                <div className="productDescription">
-                  <RichText content={description2} />
+                <div className="allDescription">
+                  <div className="productDescriptionTitle">
+                    <p>Product Description: </p>
+                  </div>
+
+                  <div className="productDescription">
+                    <RichText content={description2} />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="productPreview">
-            <div className="previewWrapper">
-              <div className="imageWrapper">
-                <div className="promoBanner">
+            <div className="productPreview">
+              <div className="previewWrapper">
+                <div className="imageWrapper">
+                  <div className="promoBanner">
+                    <Image
+                      src={imgsrc}
+                      alt={"promo-new-product"}
+                      width={145}
+                      height={90}
+                    />
+                  </div>
                   <Image
-                    src={imgsrc}
-                    alt={"promo-new-product"}
-                    width={145}
-                    height={90}
+                    src={mainImgSrc}
+                    width={478}
+                    height={478}
+                    alt={title}
                   />
                 </div>
-                <Image src={mainImgSrc} width={478} height={478} alt={title} />
-              </div>
 
-              <div className="priceSection">
-                <div className="prices">
-                  {isPromoProduct ? (
-                    <div>
-                      <p className="fadedPrice">
-                        Price: ${price} <span>- {discount}% OFF</span>
-                      </p>
-                      <p className="promoPrice">
-                        Promo price = <span>${discountPrice}</span>
-                      </p>
-                    </div>
-                  ) : isNewProduct ? (
-                    <div>
-                      <p className="newProduct">
-                        <span>NEW</span> Product
-                      </p>
-                      <p className="price">Current price ${price}</p>
-                    </div>
-                  ) : (
-                    <div>
-                      <p className="regularProduct">Regular Product</p>
-                      <p className="price">Current price ${price}</p>
-                    </div>
-                  )}
+                <div className="priceSection">
+                  <div className="prices">
+                    {isPromoProduct ? (
+                      <div>
+                        <p className="fadedPrice">
+                          Price: ${price} <span>- {discount}% OFF</span>
+                        </p>
+                        <p className="promoPrice">
+                          Promo price = <span>${discountPrice}</span>
+                        </p>
+                      </div>
+                    ) : isNewProduct ? (
+                      <div>
+                        <p className="newProduct">
+                          <span>NEW</span> Product
+                        </p>
+                        <p className="price">Current price ${price}</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p className="regularProduct">Regular Product</p>
+                        <p className="price">Current price ${price}</p>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-              <div className={`btn ${stock < 1 && "outOfStock"}`}>
-                <Link
-                  href={`${stock > 0 ? "/cart" : "#"}`}
-                  legacyBehavior
-                  passHref
-                >
-                  <button
-                    onClick={() =>
-                      stock > 0
-                        ? addToCart(
-                            id,
-                            title,
-                            stock,
-                            price,
-                            discount,
-                            mainImgSrc,
-                            numItems
-                          )
-                        : ""
-                    }
+                <div className={`btn ${stock < 1 && "outOfStock"}`}>
+                  <Link
+                    href={`${stock > 0 ? "/cart" : "#"}`}
+                    legacyBehavior
+                    passHref
                   >
-                    {stock > 0 ? "Add to Cart" : " Out of Stock"}
-                    <div className="cartIconWrap">
-                      <Image
-                        priority
-                        src={"/cartIcon-white.svg"}
-                        height={18}
-                        width={18}
-                        alt="cartIcon"
-                      />
-                    </div>
-                  </button>
-                </Link>
+                    <button
+                      onClick={() =>
+                        stock > 0
+                          ? addToCart(
+                              id,
+                              title,
+                              stock,
+                              price,
+                              discount,
+                              mainImgSrc,
+                              numItems
+                            )
+                          : ""
+                      }
+                    >
+                      {stock > 0 ? "Add to Cart" : " Out of Stock"}
+                      <div className="cartIconWrap">
+                        <Image
+                          priority
+                          src={"/cartIcon-white.svg"}
+                          height={18}
+                          width={18}
+                          alt="cartIcon"
+                        />
+                      </div>
+                    </button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </ProductStyled>
+      </ProductStyled>
+    </>
   );
 };
 

@@ -9,7 +9,7 @@ const graphcms = new GraphQLClient(process.env.NEXT_PUBLIC_HYGRAPH_API, {
 });
 
 const GetCustomerByEmail = gql`
-  query GetUserByEmail($email: String!) {
+  query GetUserByEmail($email: String) {
     customers: customers(where: { email: $email }, stage: DRAFT) {
       id
       email
@@ -18,7 +18,7 @@ const GetCustomerByEmail = gql`
 `;
 
 const CreateCustomerByEmail = gql`
-  mutation CreateCustomerByEmail($email: String!) {
+  mutation CreateCustomerByEmail($email: String) {
     newUser: createCustomer(data: { email: $email }) {
       id
       email

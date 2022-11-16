@@ -4,6 +4,7 @@ import { useProductContext } from "../state/context/productContext";
 import styled from "styled-components";
 import { useUser } from "@auth0/nextjs-auth0";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Checkout = () => {
   const { cart } = useProductContext();
@@ -51,28 +52,35 @@ const Checkout = () => {
   }, [loading]);
 
   return (
-    <StyledCheckout>
-      <div className="blueBar">
-        <h3>Hello {activeUser}</h3>
-      </div>
-      {!loading && cart.length > 0 ? (
-        <h3>Your cart total is ${amount}</h3>
-      ) : (
-        <h3>Your cart is empty</h3>
-      )}
+    <>
+      <Head>
+        <title>{"Checkout Page"}</title>
+        <meta name="description" content="Checkout Page details" />
+      </Head>
 
-      <div className="paypal-button-container">
-        {amount && amount > shipping && (
-          <PayPalCheckoutButton cartAmount={amount} cart={cart} />
+      <StyledCheckout>
+        <div className="blueBar">
+          <h3>Hello {activeUser}</h3>
+        </div>
+        {!loading && cart.length > 0 ? (
+          <h3>Your cart total is ${amount}</h3>
+        ) : (
+          <h3>Your cart is empty</h3>
         )}
-      </div>
-      <div className="testInfo">
-        <h4>Example Card Info:</h4>
-        <h4>card number: 4032038761223662</h4>
-        <h4>card valid thru: 11/26</h4>
-        <h4>cvc: 293</h4>
-      </div>
-    </StyledCheckout>
+
+        <div className="paypal-button-container">
+          {amount && amount > shipping && (
+            <PayPalCheckoutButton cartAmount={amount} cart={cart} />
+          )}
+        </div>
+        <div className="testInfo">
+          <h4>Example Card Info:</h4>
+          <h4>card number: 4032038761223662</h4>
+          <h4>card valid thru: 11/26</h4>
+          <h4>cvc: 293</h4>
+        </div>
+      </StyledCheckout>
+    </>
   );
 };
 

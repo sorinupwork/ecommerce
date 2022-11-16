@@ -1,38 +1,45 @@
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 const logout = () => {
   return (
-    <StyledInformation>
-      <div className="formWrapper">
-        <div className="topbarSection">
-          <div className="columnTitle">
-            <h3>Please confirm</h3>
+    <>
+      <Head>
+        <title>{"Logout Page"}</title>
+        <meta name="description" content="Logout Page details" />
+      </Head>
+      <StyledInformation>
+        <div className="formWrapper">
+          <div className="topbarSection">
+            <div className="columnTitle">
+              <h3>Please confirm</h3>
+            </div>
           </div>
-        </div>
 
-        <div className="backColor">
-          <div className="message">
-            <h3>Are you sure you want to logout?</h3>
+          <div className="backColor">
+            <div className="message">
+              <h3>Are you sure you want to logout?</h3>
+            </div>
+            <hr />
           </div>
-          <hr />
-        </div>
 
-        <div className="buttons">
-          <div className="btn">
-            <button>
-              <Link href={"/"}>No, go back</Link>
-            </button>
-          </div>
-          <div className="btn no">
-            <button>
-              <Link href={"/api/auth/logout"}>Yes, logout</Link>
-            </button>
+          <div className="buttons">
+            <div className="btn">
+              <button>
+                <Link href={"/"}>No, go back</Link>
+              </button>
+            </div>
+            <div className="btn no">
+              <button>
+                <Link href={"/api/auth/logout"}>Yes, logout</Link>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </StyledInformation>
+      </StyledInformation>
+    </>
   );
 };
 

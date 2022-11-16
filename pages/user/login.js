@@ -1,39 +1,46 @@
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 
 const login = () => {
   return (
-    <StyledInformation>
-      <div className="formWrapper">
-        <div className="topbarSection">
-          <div className="columnTitle">
-            <h3>Please confirm</h3>
+    <>
+      <Head>
+        <title>{"Login Page"}</title>
+        <meta name="description" content="Login Page details" />
+      </Head>
+      <StyledInformation>
+        <div className="formWrapper">
+          <div className="topbarSection">
+            <div className="columnTitle">
+              <h3>Please confirm</h3>
+            </div>
           </div>
-        </div>
 
-        <div className="backColor">
-          <div className="message">
-            <h3>By signing up you agreed to receive</h3>
-            <h3>monthy newsletters from us.</h3>
+          <div className="backColor">
+            <div className="message">
+              <h3>By signing up you agreed to receive</h3>
+              <h3>monthy newsletters from us.</h3>
+            </div>
+            <hr />
           </div>
-          <hr />
-        </div>
 
-        <div className="buttons">
-          <div className="btn">
-            <button>
-              <Link href={"/api/auth/login"}>Yes, login</Link>
-            </button>
-          </div>
-          <div className="btn no">
-            <button>
-              <Link href={"/"}>No, go back</Link>
-            </button>
+          <div className="buttons">
+            <div className="btn">
+              <button>
+                <Link href={"/api/auth/login"}>Yes, login</Link>
+              </button>
+            </div>
+            <div className="btn no">
+              <button>
+                <Link href={"/"}>No, go back</Link>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    </StyledInformation>
+      </StyledInformation>
+    </>
   );
 };
 

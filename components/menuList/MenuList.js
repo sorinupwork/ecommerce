@@ -5,9 +5,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import ListItemFake from "./ListItemFake";
 import ListItem from "./ListItem";
+import Image from "next/image";
 
 const MenuList = () => {
   const [data, setData] = useState([]);
+  const [menuHidden, setMenuHidden] = useState(true);
 
   useEffect(() => {
     async function getMenuItems() {
@@ -20,40 +22,59 @@ const MenuList = () => {
   const productsArr = Object.values(data);
   const productsListArr = Object.keys(data);
 
+  function handleMenuOnClick() {
+    setMenuHidden(!menuHidden);
+  }
+
+  const openMenuIcon = "/menu.svg";
+  const closedMenuIcon = "/menu-close.svg";
+
   return (
     <MenuStyled>
-      <div className="menuLeft">
-        <div className="menuSection">
-          <div className="menuTitleSection">
-            <div className="menuTitle">
-              <div className="titleSection">
-                <h3>Products</h3>
+      <div className="wrapper">
+        <div className="sidebar">
+          <div onClick={handleMenuOnClick} className="menuIcon">
+            <Image
+              src={menuHidden ? openMenuIcon : closedMenuIcon}
+              height={22}
+              width={39}
+              alt={"menu"}
+            />
+          </div>
+        </div>
+        <div className={`menuLeft ${menuHidden ? "hideMenu" : "showMenu"}`}>
+          <div className="menuSection">
+            <div className="menuTitleSection">
+              <div className="menuTitle">
+                <div className="titleSection">
+                  <h3>Products</h3>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div>
-            <Link href="/">
-              <p>New & Promo products</p>
-            </Link>
-          </div>
-          {productsListArr.map((item, idx) => {
-            const spaced = item.replace("_", " ");
-            const listItemTitle =
-              spaced.charAt(0).toUpperCase() + spaced.slice(1);
-            return (
-              <ListItem
-                key={idx}
-                itemDetails={productsArr[idx]}
-                itemTitle={listItemTitle}
-                rawTitle={item}
-              />
-            );
-          })}
+            <div>
+              <Link href="/">
+                <p>New & Promo products</p>
+              </Link>
+            </div>
+            {productsListArr.map((item, idx) => {
+              const spaced = item.replace("_", " ");
+              const listItemTitle =
+                spaced.charAt(0).toUpperCase() + spaced.slice(1);
+              return (
+                <ListItem
+                  key={idx}
+                  itemDetails={productsArr[idx]}
+                  itemTitle={listItemTitle}
+                  rawTitle={item}
+                />
+              );
+            })}
 
-          <ListItemFake />
-          <div className="bottomBar">
-            <h3>Products ↑</h3>
+            <ListItemFake />
+            <div className="bottomBar">
+              <h3>Products ↑</h3>
+            </div>
           </div>
         </div>
       </div>
@@ -100,6 +121,36 @@ const query = gql`
 `;
 
 const MenuStyled = styled.div`
+  .sidebar {
+    .menuIcon {
+      display: none;
+      margin-top: 1.59rem;
+      margin-left: 0.25rem;
+      @media (max-width: 768px) {
+        display: block;
+        position: absolute;
+      }
+    }
+  }
+
+  .menuLeft {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hideMenu {
+      display: none;
+    }
+    .showMenu {
+      display: block;
+      position: absolute;
+      z-index: 777;
+      margin-top: 2.5rem;
+    }
+  }
+
   .menuSection {
     min-width: 14.5rem;
     max-width: 14.5rem;

@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser";
 import styled from "styled-components";
 import MenuList from "../../components/menuList/MenuList";
 import TopBar from "../../components/productSection/TopBar";
+import Head from "next/head";
 
 const ContactPage = () => {
   const topBarTitle = "Contact";
@@ -36,103 +37,109 @@ const ContactPage = () => {
       );
   };
   return (
-    <ContactStyle>
-      <MenuList />
-      <div className="mainContactSection">
-        <TopBar title={topBarTitle} />
-        <div className="contactSection">
-          <div className="sectionTitle">
-            <h3>Contact Us</h3>
-          </div>
-
-          <div className="formAndInfo">
-            <div className="formWrap">
-              <form ref={form} onSubmit={sendEmail} className="theForm">
-                <p>
-                  <label>Enter your Name</label>
-                  <input
-                    type="text"
-                    name="user_name"
-                    minLength={"3"}
-                    required
-                  />
-                </p>
-                <p>
-                  <label>Email Address</label>
-                  <input
-                    type="email"
-                    name="user_email"
-                    minLength={"7"}
-                    required
-                  />
-                </p>
-                <p>
-                  <label>Message Subject</label>
-                  <input
-                    type="text"
-                    name="user_subject"
-                    minLength={"2"}
-                    required
-                  />
-                </p>
-                <p>
-                  <label>Enter your Message</label>
-                  <textarea
-                    name="user_message"
-                    minLength={"5"}
-                    rows={"7"}
-                    cols={"40"}
-                  />
-                </p>
-                <div className="btn">
-                  <button>Submit</button>
-                  {sent && (
-                    <span className="sentSpan">
-                      Message sent successfully !
-                    </span>
-                  )}
-                </div>
-              </form>
+    <>
+      <Head>
+        <title>{topBarTitle}</title>
+        <meta name="description" content="Contact details" />
+      </Head>
+      <ContactStyle>
+        <MenuList />
+        <div className="mainContactSection">
+          <TopBar title={topBarTitle} />
+          <div className="contactSection">
+            <div className="sectionTitle">
+              <h3>Contact Us</h3>
             </div>
 
-            <div className="infoSection">
-              <div className="infoCard">
-                <h4 className="cardHeadline">Contact Info</h4>
-                <hr />
-                <h4>
-                  <span>Name: </span>Sorin Cr Adam
-                </h4>
-                <h4>
-                  <span>Phone: </span>0040 724 825 785
-                </h4>
-                <h4>
-                  <span>Email: </span>sorin.upwork@gmail.com
-                </h4>
-                <h4>
-                  <span>Address: </span>Ploiesti, Romania, 100520
-                </h4>
-                <h4>
-                  <span>Location: </span>Blvd. Bucharest no. 8
-                </h4>
+            <div className="formAndInfo">
+              <div className="formWrap">
+                <form ref={form} onSubmit={sendEmail} className="theForm">
+                  <p>
+                    <label>Enter your Name</label>
+                    <input
+                      type="text"
+                      name="user_name"
+                      minLength={"3"}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label>Email Address</label>
+                    <input
+                      type="email"
+                      name="user_email"
+                      minLength={"7"}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label>Message Subject</label>
+                    <input
+                      type="text"
+                      name="user_subject"
+                      minLength={"2"}
+                      required
+                    />
+                  </p>
+                  <p>
+                    <label>Enter your Message</label>
+                    <textarea
+                      name="user_message"
+                      minLength={"5"}
+                      rows={"7"}
+                      cols={"40"}
+                    />
+                  </p>
+                  <div className="btn">
+                    <button>Submit</button>
+                    {sent && (
+                      <span className="sentSpan">
+                        Message sent successfully !
+                      </span>
+                    )}
+                  </div>
+                </form>
+              </div>
+
+              <div className="infoSection">
+                <div className="infoCard">
+                  <h4 className="cardHeadline">Contact Info</h4>
+                  <hr />
+                  <h4>
+                    <span>Name: </span>Sorin Cr Adam
+                  </h4>
+                  <h4>
+                    <span>Phone: </span>0040 724 825 785
+                  </h4>
+                  <h4>
+                    <span>Email: </span>sorin.upwork@gmail.com
+                  </h4>
+                  <h4>
+                    <span>Address: </span>Ploiesti, Romania, 100520
+                  </h4>
+                  <h4>
+                    <span>Location: </span>Blvd. Bucharest no. 8
+                  </h4>
+                </div>
+              </div>
+            </div>
+
+            <div className="mapSection">
+              <div className="map">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2825.280238757617!2d26.034527803894917!3d44.917636292371135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b249deca328967%3A0xaf8853e3bd44382d!2sRompetrol!5e0!3m2!1sen!2sro!4v1667416986676!5m2!1sen!2sro"
+                  width="600"
+                  height="450"
+                  frameBorder={"0"}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
           </div>
-
-          <div className="mapSection">
-            <div className="map">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2825.280238757617!2d26.034527803894917!3d44.917636292371135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b249deca328967%3A0xaf8853e3bd44382d!2sRompetrol!5e0!3m2!1sen!2sro!4v1667416986676!5m2!1sen!2sro"
-                width="600"
-                height="450"
-                frameBorder={"0"}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-          </div>
         </div>
-      </div>
-    </ContactStyle>
+      </ContactStyle>
+    </>
   );
 };
 
