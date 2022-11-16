@@ -85,6 +85,12 @@ export default CartComponent;
 
 const StyledCartItem = styled.div`
   margin: 0 5%;
+  @media (max-width: 480px) {
+    margin: 0;
+    :last-child {
+      margin-right: 2%;
+    }
+  }
   .cartWrapper {
     display: flex;
     align-items: center;
@@ -101,6 +107,12 @@ const StyledCartItem = styled.div`
       flex: 1;
       text-align: left;
       padding-left: 4%;
+      @media (max-width: 480px) {
+        padding-left: 1%;
+      }
+      @media (max-width: 414px) {
+        margin-right: -1.5rem;
+      }
     }
 
     .quantity {

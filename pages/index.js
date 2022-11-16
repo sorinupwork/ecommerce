@@ -5,8 +5,10 @@ import styled from "styled-components";
 import MenuList from "../components/menuList/MenuList";
 import ProductCard from "../components/ProductCard";
 import TopBar from "../components/productSection/TopBar";
+import FetchUsers from "../utils/FetchUsers";
 
 const Home = ({ data }) => {
+  FetchUsers();
   const topBarTitle = "New & Promo products";
 
   const productsArr = Object.values(data);
@@ -150,7 +152,12 @@ const HomeStyled = styled.div`
   display: flex;
   gap: 5%;
   padding: 0 10%;
-
+  @media (max-width: 1440px) {
+    padding: 0 5%;
+  }
+  @media (max-width: 768px) {
+    gap: 0;
+  }
   .mainProductSection {
     width: 100%;
 

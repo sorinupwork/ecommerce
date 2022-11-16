@@ -89,6 +89,9 @@ const StyledCheckout = styled.div`
     min-width: 28rem;
     text-align: center;
     border-radius: 6px 6px 0 0;
+    @media (max-width: 480px) {
+      width: 100%;
+    }
     h3 {
       color: #e9edf2;
       margin: 0;
