@@ -20,8 +20,39 @@ const Home = ({ data }) => {
   return (
     <>
       <Head>
-        <title>{topBarTitle}</title>
-        <meta name="description" content="Home Page details" />
+        <title>Pet Shop</title>
+        <meta name="title" content="Pet Shop" />
+        <meta
+          name="description"
+          content="E-commerce pet shop, accessories, toys, outfits, houses and more."
+        />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ecommerce-pet.vercel.app/" />
+        <meta property="og:title" content="Pet Shop" />
+        <meta
+          property="og:description"
+          content="E-commerce pet shop, accessories, toys, outfits, houses and more."
+        />
+        <meta
+          property="og:image"
+          content="https://i.ibb.co/3mj3JQS/petShop.webp"
+        />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:url"
+          content="https://ecommerce-pet.vercel.app/"
+        />
+        <meta property="twitter:title" content="Pet Shop" />
+        <meta
+          property="twitter:description"
+          content="E-commerce pet shop, accessories, toys, outfits, houses and more."
+        />
+        <meta
+          property="twitter:image"
+          content="https://i.ibb.co/3mj3JQS/petShop.webp"
+        />
       </Head>
 
       <HomeStyled>
