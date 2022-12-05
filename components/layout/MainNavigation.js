@@ -5,99 +5,8 @@ import styled from "styled-components";
 import { useProductContext } from "../../state/context/productContext";
 import { useUser } from "@auth0/nextjs-auth0";
 
-const MainNavigation = () => {
-  const [loading, setLoading] = useState(true);
-  const { user } = useUser();
-
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
-  const { cart } = useProductContext();
-
-  const allItemsFromCart = [];
-
-  if (!loading) {
-    cart.map((item) => {
-      allItemsFromCart.push(item.numItems);
-    });
-  }
-
-  const initialAmount = 0;
-  const itemsInCart = allItemsFromCart.reduce(
-    (previousAmount, currentAmount) => previousAmount + currentAmount,
-    initialAmount
-  );
-
-  return (
-    <Navigation>
-      <div className="topHeader">
-        <div className="imageWrapper">
-          <Link href="/">
-            <Image
-              src="/logo.svg"
-              priority
-              height={150}
-              width={200}
-              alt="logo"
-            />
-          </Link>
-        </div>
-
-        <nav>
-          <ul>
-            <li>
-              {user ? (
-                <Link href="/user/logout">{`👋 ${user.nickname}`}</Link>
-              ) : (
-                <Link href="/user/login">login</Link>
-              )}
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <Link href="/contact">contact</Link>
-            </li>
-          </ul>
-
-          <div className={`cartWrapper ${itemsInCart > 0 && "lessPadding"}`}>
-            <Link href="/cart">
-              <div className="fullCart">
-                {itemsInCart > 0 && (
-                  <div className="items">
-                    <div className="numbers">
-                      <p>{itemsInCart}</p>
-                    </div>
-                    <Image
-                      src="/cartItems.svg"
-                      height={24}
-                      width={24}
-                      alt="items in cart"
-                    />
-                  </div>
-                )}
-                <div className="cart">
-                  <Image
-                    src="/cartIcon.svg"
-                    height={24}
-                    width={24}
-                    alt="cart"
-                  />
-                </div>
-              </div>
-            </Link>
-          </div>
-        </nav>
-      </div>
-    </Navigation>
-  );
-};
-
-export default MainNavigation;
-
 const Navigation = styled.div`
   background-color: #004695;
-
   .topHeader {
     display: flex;
     justify-content: space-between;
@@ -112,28 +21,27 @@ const Navigation = styled.div`
       height: 10rem;
       padding-top: 1rem;
     }
-    nav {
-      display: flex;
-      align-items: center;
-      ul {
-        display: flex;
-        li {
-          list-style: none;
-          color: #e9edf2;
-          padding: 0 2rem;
-        }
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    ul {
+      li {
+        color: #e9edf2;
+        list-style: none;
       }
     }
-
     .cartWrapper {
       display: flex;
       padding-left: 3rem;
+
       .fullCart {
         display: flex;
+        align-items: center;
         .items {
-          align-items: center;
           position: relative;
           display: flex;
+          align-items: flex-start;
           z-index: 100;
           transform: translate(10px, -13px);
           .numbers {
@@ -154,3 +62,89 @@ const Navigation = styled.div`
     }
   }
 `;
+
+const MainNavigation = () => {
+  const [loading, setIsLoading] = useState(true);
+  const { user } = useUser();
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
+  const { cart } = useProductContext();
+
+  const allItemsFromCart = [];
+
+  if (!loading) {
+    cart.map((item) => {
+      allItemsFromCart.push(item.numItems);
+    });
+  }
+
+  const initialAmount = 0;
+  const itemsInCart = allItemsFromCart.reduce(
+    (previousAmount, currentAmount) => previousAmount + currentAmount,
+    initialAmount
+  );
+
+  // console.log('itemsInCart', itemsInCart);
+  return (
+    <Navigation>
+      <div className="topHeader">
+        <div className="imageWrapper">
+          <Link href="/">
+            <Image src="/logo.svg" height={78} width={232} alt="logo" />
+          </Link>
+        </div>
+        <nav>
+          <ul>
+            <li>
+              {user ? (
+                <Link
+                  href="/user/logout"
+                  legacyBehavior
+                >{`hi ${user.nickname}`}</Link>
+              ) : (
+                <Link href="/user/login">login</Link>
+              )}
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <Link href="/contact">contact</Link>
+            </li>
+          </ul>
+          <div className={`cartWrapper ${itemsInCart > 0 && "lessPadding"}`}>
+            <Link href="/cart">
+              <div className="fullCart">
+                {itemsInCart > 0 && (
+                  <div className="items">
+                    <div className="numbers">
+                      <p>{itemsInCart}</p>
+                    </div>
+                    <Image
+                      src="/cartItems.svg"
+                      height={24}
+                      width={24}
+                      alt="itemsInCart"
+                    />
+                  </div>
+                )}
+                <div className="cart">
+                  <Image
+                    src="/cartIcon.svg"
+                    height={24}
+                    width={24}
+                    alt="cartIcon"
+                  />
+                </div>
+              </div>
+            </Link>
+          </div>
+        </nav>
+      </div>
+    </Navigation>
+  );
+};
+
+export default MainNavigation;

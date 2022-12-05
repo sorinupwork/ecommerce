@@ -129,6 +129,15 @@ const MenuStyled = styled.div`
       @media (max-width: 768px) {
         display: block;
         position: absolute;
+        cursor: pointer;
+      }
+      @media (max-width: 480px) {
+        margin-top: 1.55rem;
+        margin-left: 0.2rem;
+      }
+      @media (max-width: 360px) {
+        margin-top: 1.5rem;
+        margin-left: 0.2rem;
       }
     }
   }
