@@ -1,7 +1,7 @@
 import { GraphQLClient, gql } from "graphql-request";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import styled from "styled-components";
-import MenuList from "../../components/menulist/MenuList";
+import MenuList from "../../components/menuList/MenuList";
 import TopBar from "../../components/productSection/TopBar";
 import useGetItemDetails from "../../utils/useGetItemDetails";
 import Image from "next/image";
