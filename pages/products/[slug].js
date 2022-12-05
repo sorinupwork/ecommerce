@@ -1,7 +1,7 @@
-import { gql, GraphQLClient } from "graphql-request";
+import { GraphQLClient, gql } from "graphql-request";
 import { RichText } from "@graphcms/rich-text-react-renderer";
 import styled from "styled-components";
-import MenuList from "../../components/menuList/MenuList";
+import MenuList from "../../components/menulist/MenuList";
 import TopBar from "../../components/productSection/TopBar";
 import useGetItemDetails from "../../utils/useGetItemDetails";
 import Image from "next/image";
@@ -9,7 +9,13 @@ import Link from "next/link";
 import { useProductContext } from "../../state/context/productContext";
 import Head from "next/head";
 
-const ProductStyle = styled.div`
+const hygraph = new GraphQLClient(process.env.HYGRAPH_API, {
+  headers: {
+    Authorization: `Bearer ${process.env.HYGRAPH_TOKEN}`,
+  },
+});
+
+const ProductStyled = styled.div`
   display: flex;
   gap: 5%;
   padding: 0 10%;
@@ -19,8 +25,10 @@ const ProductStyle = styled.div`
   @media (max-width: 768px) {
     gap: 0;
   }
+
   .productSection {
     width: 100%;
+
     .productInfo {
       display: flex;
       gap: 2rem;
@@ -31,9 +39,11 @@ const ProductStyle = styled.div`
       .text-italic {
         font-style: italic;
       }
+
       .productDetails {
         /* background-color: lightblue; */
         padding: 0 1rem;
+
         .subtitle {
           text-align: center;
           padding-bottom: 0.2rem;
@@ -51,6 +61,7 @@ const ProductStyle = styled.div`
             font-weight: bold;
           }
         }
+
         .allDescription {
           margin: 5%;
         }
@@ -91,6 +102,7 @@ const ProductStyle = styled.div`
         p {
           margin: 0.7rem;
         }
+
         .fadedPrice {
           color: #7c90a6;
           span {
@@ -106,6 +118,7 @@ const ProductStyle = styled.div`
             font-weight: 600;
           }
         }
+
         .promoPrice {
           span {
             color: #cc194c;
@@ -155,11 +168,21 @@ const ProductStyle = styled.div`
 `;
 
 const SlugPage = ({ product }) => {
+  // console.log('product is', product);
+  //-----------------------------------------
   const { addToCart } = useProductContext();
+  // console.log('ID pushed from slug is', testID);
 
+  //-----------------------------------------
   const productArray = Object.values(product);
+  // console.log('productArray is', productArray);
+
   let item = {};
-  productArray.map((items) => items.map((i) => (item = i)));
+  productArray.map((items) => {
+    items.map((i) => {
+      item = i;
+    });
+  });
 
   const {
     isNewProduct,
@@ -177,13 +200,15 @@ const SlugPage = ({ product }) => {
     description2,
   } = useGetItemDetails(item);
 
+  // console.log('item is', item);
+
   return (
     <>
       <Head>
         <title>{title}</title>
         <meta name="description" content={title} />
       </Head>
-      <ProductStyle>
+      <ProductStyled>
         <div className="menuSection">
           <MenuList />
         </div>
@@ -202,35 +227,7 @@ const SlugPage = ({ product }) => {
                     <p>Product description:</p>
                   </div>
                   <div className="productDescription">
-                    <RichText
-                      content={description2}
-                      renderers={{
-                        h1: ({ children }) => (
-                          <h1 className="text-normal">{children}</h1>
-                        ),
-                        h2: ({ children }) => (
-                          <h2 className="text-normal">{children}</h2>
-                        ),
-                        h3: ({ children }) => (
-                          <h3 className="text-normal">{children}</h3>
-                        ),
-                        h4: ({ children }) => (
-                          <h4 className="text-normal">{children}</h4>
-                        ),
-                        p: ({ children }) => (
-                          <p className="text-normal">{children}</p>
-                        ),
-                        bold: ({ children }) => (
-                          <strong className="text-bold">{children}</strong>
-                        ),
-                        italic: ({ children }) => (
-                          <span className="text-italic">{children}</span>
-                        ),
-                      }}
-                    />
-                    <a className="productInfoLink" href={"/"}>
-                      More product details:
-                    </a>
+                    <RichText content={description2} />
                   </div>
                 </div>
               </div>
@@ -251,6 +248,10 @@ const SlugPage = ({ product }) => {
                     height={478}
                     width={478}
                     alt={title}
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto",
+                    }}
                   />
                 </div>
                 <div className="priceSection">
@@ -277,9 +278,6 @@ const SlugPage = ({ product }) => {
                         <p className="price">Current price ${price}</p>
                       </div>
                     )}
-                    {/* <p className="warranty">
-                      Warranty: <span>{warranty}</span> months
-                    </p> */}
                   </div>
                 </div>
 
@@ -320,18 +318,12 @@ const SlugPage = ({ product }) => {
             </div>
           </div>
         </div>
-      </ProductStyle>
+      </ProductStyled>
     </>
   );
 };
 
 export default SlugPage;
-
-const hygraph = new GraphQLClient(process.env.HYGRAPH_API, {
-  headers: {
-    Authorization: `Bearer ${process.env.HYGRAPH_TOKEN}`,
-  },
-});
 
 export async function getServerSideProps(context) {
   const currentSlug = context.params.slug;
@@ -431,9 +423,7 @@ export async function getServerSideProps(context) {
     }
   `;
 
-  const variables = {
-    currentSlug,
-  };
+  const variables = { currentSlug };
   const product = await hygraph.request(query, variables);
 
   return {
